@@ -15,6 +15,20 @@
       "when": 1744530000804,
       "tag": "0001_familiar_groot",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1744552069637,
+      "tag": "0002_nasty_mastermind",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1744643227604,
+      "tag": "0003_amusing_susan_delgado",
+      "breakpoints": true
     }
   ]
 }

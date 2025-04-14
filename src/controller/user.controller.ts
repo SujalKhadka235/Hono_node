@@ -1,9 +1,10 @@
-import { usersTable } from "../db/schema.js";
+import { badTokenTable, usersTable } from "../db/schema.js";
 import { db } from "../db/client.js";
 import { createUser } from "../services/user.service.js";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import type { Context } from "hono";
 export const getAllUsersController = async (c: any) => {
   const users = await db.select().from(usersTable);
   return c.json(users);
@@ -58,5 +59,43 @@ export const loginUserController = async (c: any) => {
     );
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const logOutUserController = async (c: any) => {
+  try {
+    const authHeader = await c.req.header("authorization");
+
+    if (!authHeader || !authHeader.startsWith("Bearer")) {
+      return c.json({ msg: "token missing" }, 400);
+    }
+    const token = authHeader.split(" ")[1];
+    await db.insert(badTokenTable).values({
+      token: token,
+    });
+    return c.json({ msg: "logged out Sucessfully" }, 200);
+  } catch (e) {
+    console.log(e);
+    return c.json({ message: "something went wrong here" });
+  }
+};
+
+export const getProfileController = async (c: any) => {
+  try {
+    const userID = c.get("userID");
+    const user = await db
+      .select()
+      .from(usersTable)
+      .where(eq(usersTable.id, userID));
+    if (!user) {
+      return c.json(
+        { msg: "User associated with token no longer exists" },
+        400
+      );
+    }
+    return c.json({ yourProfile: user[0] }, 200);
+  } catch (e) {
+    console.log(e);
+    return c.json({ msg: "Internal server error" }, 500);
   }
 };

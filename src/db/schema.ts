@@ -8,3 +8,7 @@ export const usersTable = mysqlTable("users", {
   email: varchar({ length: 255 }).unique().notNull(),
   password: varchar({ length: 255 }).notNull(),
 });
+
+export const badTokenTable = mysqlTable("badTokens", {
+  token: varchar({ length: 255 }).notNull(),
+});

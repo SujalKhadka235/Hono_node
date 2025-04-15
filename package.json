@@ -5,11 +5,17 @@
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
+    "@apollo/server": "^4.12.0",
     "@hono/node-server": "^1.14.1",
+    "apollo-server": "^3.13.0",
+    "axios": "^1.8.4",
     "bcrypt": "^5.1.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "drizzle-kit": "^0.30.6",
     "drizzle-orm": "^0.41.0",
+    "graphql": "^16.10.0",
     "hono": "^4.7.6",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",

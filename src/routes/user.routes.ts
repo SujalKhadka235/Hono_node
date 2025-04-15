@@ -3,7 +3,7 @@ import * as userController from "../controller/user.controller.js";
 import { validateToken } from "../middleware/user.middleware.js";
 const userRoute = new Hono();
 userRoute.get("/", userController.getAllUsersController);
-userRoute.post("/", userController.createUserController);
+userRoute.post("/register", userController.createUserController);
 userRoute.post("/login", userController.loginUserController);
 userRoute.post("/logout", userController.logOutUserController);
 userRoute.get("/profile", validateToken, userController.getProfileController);
